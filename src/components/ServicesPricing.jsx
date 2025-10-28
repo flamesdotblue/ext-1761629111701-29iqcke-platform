@@ -1,116 +1,123 @@
-import { Scissors, Razor, Palette, Sparkles, Check } from 'lucide-react';
+import { Scissors, Palette, Sparkles, Check, Star } from 'lucide-react';
 
 const services = [
   {
-    title: 'Precision Cut',
-    desc: 'Tailored cuts for all hair types with expert consultation.',
-    price: '$45',
     icon: Scissors,
+    name: 'Precision Haircut',
+    desc: 'Tailored cut with wash, scalp massage, and blowout finish.',
+    price: '$45+',
   },
   {
-    title: 'Clipper & Beard Line-up',
-    desc: 'Clean clipper work, edges, and finish for a sharp look.',
-    price: '$35',
-    icon: Razor,
-  },
-  {
-    title: 'Color & Highlights',
-    desc: 'Dimensional color, balayage, or gloss to refresh your tone.',
-    price: 'from $95',
     icon: Palette,
+    name: 'Custom Color',
+    desc: 'Single process or glaze to enhance tone and shine.',
+    price: '$80+',
   },
   {
-    title: 'Blowout & Style',
-    desc: 'Smooth, bouncy finish with long-lasting shine.',
-    price: '$40',
     icon: Sparkles,
+    name: 'Highlights & Balayage',
+    desc: 'Lived-in dimension or high-impact brightness.',
+    price: '$150+',
+  },
+  {
+    icon: Star,
+    name: 'Event Styling',
+    desc: 'Polished blowout, curls, or updo for special moments.',
+    price: '$70+',
   },
 ];
 
-const tiers = [
+const packages = [
   {
-    name: 'Essential',
-    price: '$75',
-    features: ['Wash + Cut', 'Quick style', 'Take-home tips'],
+    title: 'Essential Glow',
+    price: '$120',
+    features: [
+      'Cut + Classic Blowout',
+      'Hydration treatment',
+      'Home-care pro tips',
+    ],
+    highlight: false,
   },
   {
-    name: 'Signature',
-    price: '$145',
-    features: ['Consultation', 'Cut + Treatment', 'Blowout style'],
-    highlighted: true,
+    title: 'Color Refresh',
+    price: '$210',
+    features: [
+      'Custom color + Gloss',
+      'Bond repair treatment',
+      'Blowout & style finish',
+    ],
+    highlight: true,
   },
   {
-    name: 'Luxe Color',
-    price: '$220',
-    features: ['Custom color', 'Gloss + Bond builder', 'Finish & style'],
+    title: 'The Makeover',
+    price: '$320',
+    features: [
+      'Transformation color/balayage',
+      'Haircut & luxury blowout',
+      'Take-home mask',
+    ],
+    highlight: false,
   },
 ];
 
-const ServicesPricing = () => {
+export default function ServicesPricing() {
   return (
-    <section id="services" className="border-t border-neutral-200 bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-3xl tracking-tight md:text-4xl">Services & Pricing</h2>
-          <p className="mt-3 text-neutral-600">Transparent pricing and handcrafted results. Book by phone for the best availability.</p>
+    <section id="services" className="py-16 sm:py-20 border-t border-neutral-800">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-2xl">
+          <p className="text-sm text-rose-300/90 font-medium tracking-wide">Our Craft</p>
+          <h2 className="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight">Services and Pricing</h2>
+          <p className="mt-3 text-neutral-300">Transparent pricing for expertly delivered services. Final quotes may vary by hair length, density, and technique.
+          </p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {services.map((s) => (
-            <div key={s.title} className="flex items-start gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 shadow-sm">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-neutral-900 text-white">
-                <s.icon className="h-5 w-5" />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-medium">{s.title}</h3>
-                  <span className="text-sm font-semibold text-neutral-900">{s.price}</span>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {services.map(({ icon: Icon, name, desc, price }) => (
+            <div key={name} className="group rounded-xl border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-900/70 transition p-5">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-md bg-neutral-800 group-hover:bg-neutral-700 transition">
+                    <Icon size={18} />
+                  </div>
+                  <div>
+                    <h3 className="font-medium">{name}</h3>
+                    <p className="text-sm text-neutral-300">{desc}</p>
+                  </div>
                 </div>
-                <p className="mt-1 text-sm text-neutral-600">{s.desc}</p>
+                <span className="text-sm font-semibold text-neutral-100">{price}</span>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {tiers.map((tier) => (
-            <div
-              key={tier.name}
-              className={`relative rounded-2xl border p-6 shadow-sm ${
-                tier.highlighted ? 'border-neutral-900 bg-neutral-900 text-white' : 'border-neutral-200 bg-white'
-              }`}
-            >
-              {tier.highlighted && (
-                <span className="absolute -top-3 left-6 rounded-full border border-neutral-700 bg-white/10 px-3 py-1 text-xs backdrop-blur">
-                  Popular
-                </span>
-              )}
-              <h3 className="text-lg font-semibold">{tier.name}</h3>
-              <p className={`mt-1 text-3xl font-bold ${tier.highlighted ? 'text-white' : 'text-neutral-900'}`}>{tier.price}</p>
-              <ul className="mt-4 space-y-2 text-sm">
-                {tier.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <Check className={`mt-0.5 h-4 w-4 ${tier.highlighted ? 'text-white' : 'text-neutral-900'}`} />
-                    <span className={tier.highlighted ? 'text-white/90' : 'text-neutral-700'}>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="tel:+1234567890"
-                className={`mt-5 inline-flex w-full items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition ${
-                  tier.highlighted
-                    ? 'bg-white text-neutral-900 hover:bg-neutral-100'
-                    : 'bg-neutral-900 text-white hover:bg-neutral-800'
-                }`}
+        <div id="pricing" className="mt-14">
+          <h3 className="text-2xl font-semibold tracking-tight">Packages</h3>
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {packages.map((p) => (
+              <div
+                key={p.title}
+                className={`relative rounded-2xl border ${p.highlight ? 'border-rose-400/60' : 'border-neutral-800'} bg-neutral-900/50 p-6`}
               >
-                Call to Book
-              </a>
-            </div>
-          ))}
+                {p.highlight && (
+                  <span className="absolute -top-3 left-6 text-xs px-2 py-0.5 rounded-full bg-rose-500 text-white">Most Popular</span>
+                )}
+                <h4 className="text-lg font-medium">{p.title}</h4>
+                <p className="mt-2 text-3xl font-semibold">{p.price}</p>
+                <ul className="mt-4 space-y-2 text-sm text-neutral-300">
+                  {p.features.map((f) => (
+                    <li key={f} className="flex items-center gap-2">
+                      <Check size={16} className="text-emerald-400" /> {f}
+                    </li>
+                  ))}
+                </ul>
+                <a href="#book" className={`mt-5 inline-flex justify-center w-full px-4 py-2 rounded-md font-medium transition ${p.highlight ? 'bg-white text-neutral-900 hover:opacity-90' : 'border border-neutral-700 hover:bg-neutral-800'}`}>
+                  Book Package
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default ServicesPricing;
+}
